@@ -21,11 +21,9 @@ app.config.suppress_callback_exceptions = True
 
 # Load data from csv
 def load_data():
-    # To do: Completar la función
-    
     df = pd.read_csv("datos_energia.csv")
-    df['fecha'] = pd.to_datetime(df['fecha'])
-    df.set_index('fecha', inplace=True)
+    df['time'] = pd.to_datetime(df['time'])
+    df.set_index('time', inplace=True)
     return df
 
 
@@ -85,7 +83,7 @@ def plot_series(data, initial_date, proy):
         #title='Continuous, variable value error bars',
         hovermode="x"
     )
-    #fig = px.line(data2, x='local_timestamp', y="Demanda total [MW]", markers=True, labels={"local_timestamp": "Fecha"})
+    #fig = px.line(data2, x='local_timestamp', y="Demanda total [MW]", markers=True, labels={"local_timestamp": "time"})
     fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="#2cfec1")
     fig.update_xaxes(showgrid=True, gridwidth=0.25, gridcolor='#7C7C7C')
     fig.update_yaxes(showgrid=True, gridwidth=0.25, gridcolor='#7C7C7C')
@@ -120,14 +118,14 @@ def generate_control_card():
         id="control-card",
         children=[
 
-            # Fecha inicial
-            html.P("Seleccionar fecha y hora inicial:"),
+            # time inicial
+            html.P("Seleccionar time y hora inicial:"),
 
             html.Div(
-                id="componentes-fecha-inicial",
+                id="componentes-time-inicial",
                 children=[
                     html.Div(
-                        id="componente-fecha",
+                        id="componente-time",
                         children=[
                             dcc.DatePickerSingle(
                                 id='datepicker-inicial',
